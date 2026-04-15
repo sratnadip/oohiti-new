@@ -139,39 +139,39 @@ export default function App() {
     { 
       category: "Frontend", 
       techs: [
-        { name: "React", logo: "svg/frontend/React_dark.svg" },
-        { name: "Next.js", logo: "svg/frontend/nextjs_icon_dark.svg" },
-        { name: "TypeScript", logo: "svg/frontend/typescript.svg" },
-        { name: "Tailwind CSS", logo: "svg/frontend/tailwindcss.svg" },
-        { name: "Redux", logo: "svg/frontend/redux.svg" }
+        { name: "React", logo: "/images/frontend/React_dark.svg" },
+        { name: "Next.js", logo: "/images/frontend/nextjs_icon_dark.svg" },
+        { name: "TypeScript", logo: "/images/frontend/typescript.svg" },
+        { name: "Tailwind CSS", logo: "/images/frontend/tailwindcss.svg" },
+        { name: "Redux", logo: "/images/frontend/redux.svg" }
       ] 
     },
     { 
       category: "Backend", 
       techs: [
-        { name: "Node.js", logo: "svg/backend/nodejs.svg" },
-        { name: "Go", logo: "svg/backend/Go_light.svg" },
-        { name: "Python", logo: "svg/backend/python.svg" },
-        { name: "PostgreSQL", logo: "svg/backend/postgresql.svg" },
-        { name: "Redis", logo: "svg/backend/redis.svg" }
+        { name: "Node.js", logo: "/images/backend/nodejs.svg" },
+        { name: "Go", logo: "/images/backend/Go_light.svg" },
+        { name: "Python", logo: "/images/backend/python.svg" },
+        { name: "PostgreSQL", logo: "/images/backend/postgresql.svg" },
+        { name: "Redis", logo: "/images/backend/redis.svg" }
       ] 
     },
     { 
       category: "Infrastructure", 
       techs: [
-        { name: "AWS", logo: "svg/infrastructure/aws_light.svg" },
-        { name: "Azure", logo: "svg/infrastructure/azure.svg" },
-        { name: "Google Cloud", logo: "svg/infrastructure/google-cloud.svg" }
+        { name: "AWS", logo: "/images/infrastructure/aws_light.svg" },
+        { name: "Azure", logo: "/images/infrastructure/azure.svg" },
+        { name: "Google Cloud", logo: "/images/infrastructure/google-cloud.svg" }
       ] 
     },
     { 
       category: "DevOps", 
       techs: [
-        { name: "Docker", logo: "svg/devops/docker.svg" },
-        { name: "Kubernetes", logo: "svg/devops/kubernetes.svg" },
-        { name: "Terraform", logo: "svg/devops/terraform.svg" },
-        { name: "GitHub", logo: "svg/devops/GitHub_light.svg" },
-        { name: "Grafana", logo: "svg/devops/grafana.svg" }
+        { name: "Docker", logo: "/images/devops/docker.svg" },
+        { name: "Kubernetes", logo: "/images/devops/kubernetes.svg" },
+        { name: "Terraform", logo: "/images/devops/terraform.svg" },
+        { name: "GitHub", logo: "/images/devops/GitHub_light.svg" },
+        { name: "Grafana", logo: "/images/devops/grafana.svg" }
       ] 
     }
   ];
@@ -257,7 +257,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
           <div className="flex items-center group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
-              src="logo.png" 
+              src="/logo.png" 
               alt="Oohiti Logo" 
               className="h-20 w-auto object-contain transition-transform group-hover:scale-105"
             />
@@ -699,7 +699,7 @@ export default function App() {
           <div className="col-span-2">
             <div className="flex items-center mb-6 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               <img 
-                src="logo.png" 
+                src="/logo.png" 
                 alt="Oohiti Logo" 
                 className="h-20 w-auto object-contain transition-transform group-hover:scale-105"
               />
@@ -714,7 +714,7 @@ export default function App() {
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full bg-md-surface-container flex items-center justify-center hover:bg-md-primary/10 transition-colors"
               >
-                <img src="linkedin.svg" alt="LinkedIn" className="w-5 h-5" referrerPolicy="no-referrer" />
+                <img src="/linkedin.svg" alt="LinkedIn" className="w-5 h-5" referrerPolicy="no-referrer" />
               </a>
               <a 
                 href="https://x.com/Oohiti130611" 
@@ -722,7 +722,7 @@ export default function App() {
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full bg-md-surface-container flex items-center justify-center hover:bg-md-primary/10 transition-colors"
               >
-                <img src="twitter.svg" alt="Twitter" className="w-5 h-5" referrerPolicy="no-referrer" />
+                <img src="/twitter.svg" alt="Twitter" className="w-5 h-5" referrerPolicy="no-referrer" />
               </a>
             </div>
           </div>
