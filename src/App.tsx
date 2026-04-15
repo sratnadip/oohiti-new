@@ -139,39 +139,39 @@ export default function App() {
     { 
       category: "Frontend", 
       techs: [
-        { name: "React", logo: "/svg/frontend/React_dark.svg" },
-        { name: "Next.js", logo: "/svg/frontend/nextjs_icon_dark.svg" },
-        { name: "TypeScript", logo: "/svg/frontend/typescript.svg" },
-        { name: "Tailwind CSS", logo: "/svg/frontend/tailwindcss.svg" },
-        { name: "Redux", logo: "/svg/frontend/redux.svg" }
+        { name: "React", logo: "svg/frontend/React_dark.svg" },
+        { name: "Next.js", logo: "svg/frontend/nextjs_icon_dark.svg" },
+        { name: "TypeScript", logo: "svg/frontend/typescript.svg" },
+        { name: "Tailwind CSS", logo: "svg/frontend/tailwindcss.svg" },
+        { name: "Redux", logo: "svg/frontend/redux.svg" }
       ] 
     },
     { 
       category: "Backend", 
       techs: [
-        { name: "Node.js", logo: "/svg/backend/nodejs.svg" },
-        { name: "Go", logo: "/svg/backend/Go_light.svg" },
-        { name: "Python", logo: "/svg/backend/python.svg" },
-        { name: "PostgreSQL", logo: "/svg/backend/postgresql.svg" },
-        { name: "Redis", logo: "/svg/backend/redis.svg" }
+        { name: "Node.js", logo: "svg/backend/nodejs.svg" },
+        { name: "Go", logo: "svg/backend/Go_light.svg" },
+        { name: "Python", logo: "svg/backend/python.svg" },
+        { name: "PostgreSQL", logo: "svg/backend/postgresql.svg" },
+        { name: "Redis", logo: "svg/backend/redis.svg" }
       ] 
     },
     { 
       category: "Infrastructure", 
       techs: [
-        { name: "AWS", logo: "/svg/Infrastructure/aws_light.svg" },
-        { name: "Azure", logo: "/svg/Infrastructure/azure.svg" },
-        { name: "Google Cloud", logo: "/svg/Infrastructure/google-cloud.svg" }
+        { name: "AWS", logo: "svg/infrastructure/aws_light.svg" },
+        { name: "Azure", logo: "svg/infrastructure/azure.svg" },
+        { name: "Google Cloud", logo: "svg/infrastructure/google-cloud.svg" }
       ] 
     },
     { 
       category: "DevOps", 
       techs: [
-        { name: "Docker", logo: "/svg/devops/docker.svg" },
-        { name: "Kubernetes", logo: "/svg/devops/kubernetes.svg" },
-        { name: "Terraform", logo: "/svg/devops/terraform.svg" },
-        { name: "GitHub", logo: "/svg/devops/GitHub_light.svg" },
-        { name: "Grafana", logo: "/svg/devops/grafana.svg" }
+        { name: "Docker", logo: "svg/devops/docker.svg" },
+        { name: "Kubernetes", logo: "svg/devops/kubernetes.svg" },
+        { name: "Terraform", logo: "svg/devops/terraform.svg" },
+        { name: "GitHub", logo: "svg/devops/GitHub_light.svg" },
+        { name: "Grafana", logo: "svg/devops/grafana.svg" }
       ] 
     }
   ];
@@ -257,10 +257,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
           <div className="flex items-center group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
-              src="/logo.png" 
+              src="logo.png" 
               alt="Oohiti Logo" 
               className="h-20 w-auto object-contain transition-transform group-hover:scale-105"
-              referrerPolicy="no-referrer"
             />
           </div>
 
@@ -429,7 +428,6 @@ export default function App() {
                           src={tech.logo} 
                           alt={tech.name} 
                           className="w-full h-full object-contain filter grayscale group-hover/tech:grayscale-0 transition-all duration-300"
-                          referrerPolicy="no-referrer"
                         />
                       </div>
                       <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-md-surface-container text-[10px] font-bold rounded opacity-0 group-hover/tech:opacity-100 transition-opacity whitespace-nowrap pointer-events-none border border-md-outline/10 z-10">
@@ -701,10 +699,9 @@ export default function App() {
           <div className="col-span-2">
             <div className="flex items-center mb-6 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
               <img 
-                src="/logo.png" 
+                src="logo.png" 
                 alt="Oohiti Logo" 
                 className="h-20 w-auto object-contain transition-transform group-hover:scale-105"
-                referrerPolicy="no-referrer"
               />
             </div>
             <p className="text-md-on-surface-variant max-w-sm mb-8 leading-relaxed">
@@ -717,7 +714,7 @@ export default function App() {
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full bg-md-surface-container flex items-center justify-center hover:bg-md-primary/10 transition-colors"
               >
-                <img src="/linkedin.svg" alt="LinkedIn" className="w-5 h-5" referrerPolicy="no-referrer" />
+                <img src="linkedin.svg" alt="LinkedIn" className="w-5 h-5" referrerPolicy="no-referrer" />
               </a>
               <a 
                 href="https://x.com/Oohiti130611" 
@@ -725,7 +722,7 @@ export default function App() {
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full bg-md-surface-container flex items-center justify-center hover:bg-md-primary/10 transition-colors"
               >
-                <img src="/twitter.svg" alt="Twitter" className="w-5 h-5" referrerPolicy="no-referrer" />
+                <img src="twitter.svg" alt="Twitter" className="w-5 h-5" referrerPolicy="no-referrer" />
               </a>
             </div>
           </div>
