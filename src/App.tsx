@@ -159,7 +159,7 @@ export default function App() {
     { 
       category: "Infrastructure", 
       techs: [
-        { name: "AWS", logo: "/svg/Infrastructure/Amazon Web Services_light.svg" },
+        { name: "AWS", logo: "/svg/Infrastructure/aws_light.svg" },
         { name: "Azure", logo: "/svg/Infrastructure/azure.svg" },
         { name: "Google Cloud", logo: "/svg/Infrastructure/google-cloud.svg" }
       ] 
