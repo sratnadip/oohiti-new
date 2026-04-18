@@ -25,7 +25,7 @@ import { Button } from './components/Button';
 import { Card } from './components/Card';
 import { Section } from './components/Section';
 import { Atmosphere } from './components/Atmosphere';
-import logoUrl from './assets/images/logo.png';
+import logoUrl from './assets/images/oohiti-logo.png';
 import linkedinUrl from './assets/images/linkedin.svg';
 import twitterUrl from './assets/images/twitter.svg';
 
@@ -283,7 +283,7 @@ export default function App() {
 
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-md-surface/80 backdrop-blur-md border-b border-md-outline/10">
-        <div className="max-w-7xl mx-auto px-4 h-24 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 h-18 flex items-center justify-between">
           <div className="flex items-center group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
             <img 
               src={logoUrl} 
@@ -346,7 +346,7 @@ export default function App() {
               We build the <span className="text-md-primary">backbone</span> of your success.
             </h1>
             <p className="text-xl text-md-on-background font-medium mb-4 leading-relaxed mx-auto max-w-2xl">
-              We help startups turn ideas into reliable, production-ready products — without the usual delays, confusion, or technical complexity.
+              We help startups turn ideas into reliable, production ready products without the usual delays, confusion, or technical complexity.
             </p>
             <p className="text-lg text-md-on-surface-variant mb-10 leading-relaxed mx-auto max-w-2xl">
               From MVP to scalable systems, we design, build, and manage everything you need to launch and grow faster.
@@ -421,7 +421,7 @@ export default function App() {
               <div className="w-12 h-12 rounded-full bg-md-primary text-white flex items-center justify-center font-bold text-lg mx-auto mb-6 group-hover:scale-110 transition-transform">
                 {index + 1}
               </div>
-              <h3 className="text-xl font-bold mb-1">{step.number} — {step.title}</h3>
+              <h3 className="text-xl font-bold mb-1">{step.number}: {step.title}</h3>
               <p className="text-md-on-surface-variant text-sm leading-relaxed">
                 {step.description}
               </p>
@@ -582,7 +582,7 @@ export default function App() {
             </h2>
             <div className="space-y-6 text-lg text-md-on-surface-variant leading-relaxed">
               <p>We work with startups and growing businesses that need more than just developers.</p>
-              <p className="font-bold text-md-on-background">You don’t just need code — you need a system that works, scales, and supports your growth.</p>
+              <p className="font-bold text-md-on-background">You don’t just need code you need a system that works, scales, and supports your growth.</p>
               <p>That’s where we come in. We focus on building reliable, long-term solutions so you can focus on your product, users, and business.</p>
             </div>
             <div className="mt-10 p-6 bg-md-primary/5 rounded-md-xl border-l-4 border-md-primary">
