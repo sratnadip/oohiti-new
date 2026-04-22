@@ -25,7 +25,7 @@ import { Button } from './components/Button';
 import { Card } from './components/Card';
 import { Section } from './components/Section';
 import { Atmosphere } from './components/Atmosphere';
-import logoUrl from './assets/images/oohiti-logo.png';
+import logoUrl from './assets/images/oohiti-logo.webp';
 import linkedinUrl from './assets/images/linkedin.svg';
 import twitterUrl from './assets/images/twitter.svg';
 
@@ -288,6 +288,7 @@ export default function App() {
             <img 
               src={logoUrl} 
               alt="Oohiti Logo" 
+              loading="lazy"
               className="h-20 w-auto object-contain transition-transform group-hover:scale-105"
             />
           </div>
@@ -331,6 +332,7 @@ export default function App() {
           <img 
             src={logoUrl} 
             alt="" 
+            loading="lazy"
             className="w-[120%] max-w-none h-auto opacity-[0.03] grayscale scale-110 select-none"
             referrerPolicy="no-referrer"
           />
@@ -456,6 +458,7 @@ export default function App() {
                         <img 
                           src={tech.logo} 
                           alt={tech.name} 
+                          loading="lazy"
                           className="w-full h-full object-contain filter grayscale group-hover/tech:grayscale-0 transition-all duration-300"
                         />
                       </div>
@@ -730,6 +733,7 @@ export default function App() {
               <img 
                 src={logoUrl} 
                 alt="Oohiti Logo" 
+                loading="lazy"
                 className="h-20 w-auto object-contain transition-transform group-hover:scale-105"
               />
             </div>
@@ -743,7 +747,7 @@ export default function App() {
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full bg-md-surface-container flex items-center justify-center hover:bg-md-primary/10 transition-colors"
               >
-                <img src={linkedinUrl} alt="LinkedIn" className="w-5 h-5" referrerPolicy="no-referrer" />
+                <img src={linkedinUrl} alt="LinkedIn" loading="lazy" className="w-5 h-5" referrerPolicy="no-referrer" />
               </a>
               <a 
                 href="https://x.com/Oohiti130611" 
@@ -751,7 +755,7 @@ export default function App() {
                 rel="noopener noreferrer" 
                 className="w-10 h-10 rounded-full bg-md-surface-container flex items-center justify-center hover:bg-md-primary/10 transition-colors"
               >
-                <img src={twitterUrl} alt="Twitter" className="w-5 h-5" referrerPolicy="no-referrer" />
+                <img src={twitterUrl} alt="Twitter" loading="lazy" className="w-5 h-5" referrerPolicy="no-referrer" />
               </a>
             </div>
           </div>
