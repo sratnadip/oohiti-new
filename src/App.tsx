@@ -298,6 +298,7 @@ export default function App() {
             <a href="#process" className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Process</a>
             <a href="#work" className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Work</a>
             <a href="#about" className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">About</a>
+            <a href="#careers" className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Careers</a>
             <Button variant="filled" onClick={() => scrollToSection('contact')}>Get in touch</Button>
           </div>
 
@@ -320,6 +321,7 @@ export default function App() {
             <a href="#process" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium p-2">Process</a>
             <a href="#work" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium p-2">Work</a>
             <a href="#about" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium p-2">About</a>
+            <a href="#careers" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium p-2">Careers</a>
             <Button variant="filled" className="w-full" onClick={() => { scrollToSection('contact'); setIsMenuOpen(false); }}>Get in touch</Button>
           </motion.div>
         )}
@@ -592,6 +594,62 @@ export default function App() {
               <p className="italic text-md-on-background font-medium">
                 "We think like product partners, not task executors."
               </p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Careers Section */}
+      <Section id="careers" className="bg-md-surface-container/30">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-md-primary mb-4 block">Careers</span>
+            <h2 className="text-4xl font-bold text-md-on-background mb-6 tracking-tight">
+              Build your career with us
+            </h2>
+            <div className="space-y-6 text-lg text-md-on-surface-variant leading-relaxed mb-8">
+              <p>We're looking for passionate individuals who want to build real-world products and gain hands-on industry exposure.</p>
+              <div className="bg-md-surface p-8 rounded-2xl border border-md-outline/10 md-shadow-1">
+                <h3 className="text-2xl font-bold text-md-primary mb-3">Internship Training Program</h3>
+                <p className="text-base text-md-on-surface-variant mb-6">A fast-paced, immersive program designed for aspiring developers. Focus on building real-world applications, modern tech stacks, deployment, and creating a production-ready portfolio.</p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a href="/assets/oohiti_brochure.pdf" target="_blank" rel="noopener noreferrer">
+                    <Button variant="filled" className="w-full sm:w-auto h-12 px-6">
+                      View Brochure
+                    </Button>
+                  </a>
+                  <a href="/assets/oohiti_brochure.pdf" download>
+                    <Button variant="outlined" className="w-full sm:w-auto h-12 px-6">
+                      Download Brochure
+                    </Button>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="relative h-full min-h-[400px] bg-md-surface-container rounded-3xl md-shadow-1 overflow-hidden flex items-center justify-center p-8 border border-md-outline/5">
+            <div className="absolute inset-0 bg-gradient-to-br from-md-primary/10 to-transparent pointer-events-none"></div>
+            <div className="grid grid-cols-2 gap-6 w-full relative z-10">
+              <div className="bg-md-surface p-6 rounded-2xl text-center md-shadow-sm group hover:border-md-primary/30 transition-colors border border-transparent">
+                <Rocket className="w-10 h-10 text-md-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                <h4 className="font-bold mb-2">Real Projects</h4>
+                <p className="text-sm text-md-on-surface-variant">Build from scratch</p>
+              </div>
+              <div className="bg-md-surface p-6 rounded-2xl text-center md-shadow-sm mt-12 group hover:border-md-primary/30 transition-colors border border-transparent">
+                <Layers className="w-10 h-10 text-md-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                <h4 className="font-bold mb-2">Modern Stack</h4>
+                <p className="text-sm text-md-on-surface-variant">React, Node, Cloud</p>
+              </div>
+              <div className="bg-md-surface p-6 rounded-2xl text-center md-shadow-sm -mt-12 group hover:border-md-primary/30 transition-colors border border-transparent">
+                <Cloud className="w-10 h-10 text-md-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                <h4 className="font-bold mb-2">Deployment</h4>
+                <p className="text-sm text-md-on-surface-variant">CI/CD & DevOps</p>
+              </div>
+              <div className="bg-md-surface p-6 rounded-2xl text-center md-shadow-sm group hover:border-md-primary/30 transition-colors border border-transparent">
+                <Users className="w-10 h-10 text-md-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
+                <h4 className="font-bold mb-2">Mentorship</h4>
+                <p className="text-sm text-md-on-surface-variant">Industry experts</p>
+              </div>
             </div>
           </div>
         </div>
