@@ -1,12 +1,12 @@
 import { motion } from 'motion/react';
-import { 
-  Cloud, 
-  Cpu, 
-  Layers, 
-  Rocket, 
-  CheckCircle2, 
-  ArrowRight, 
-  Menu, 
+import {
+  Cloud,
+  Cpu,
+  Layers,
+  Rocket,
+  CheckCircle2,
+  ArrowRight,
+  Menu,
   X,
   ShieldCheck,
   Zap,
@@ -19,12 +19,13 @@ import {
   Send,
   Mail
 } from 'lucide-react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { Button } from './components/Button';
 import { Card } from './components/Card';
 import { Section } from './components/Section';
 import { Atmosphere } from './components/Atmosphere';
+import Careers from './pages/Careers';
 import logoUrl from './assets/images/oohiti-logo.webp';
 import linkedinUrl from './assets/images/linkedin.svg';
 import twitterUrl from './assets/images/twitter.svg';
@@ -64,6 +65,49 @@ export default function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  const getInitialPage = (): 'home' | 'careers' => {
+    const path = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+    if (path.includes('careers') || hash.includes('careers')) {
+      return 'careers';
+    }
+    return 'home';
+  };
+
+  const [currentPage, setCurrentPage] = useState<'home' | 'careers'>(getInitialPage());
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+      if (path.includes('careers') || hash.includes('careers')) {
+        setCurrentPage('careers');
+      } else {
+        setCurrentPage('home');
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const navigateTo = (page: 'home' | 'careers', hashToScroll?: string) => {
+    if (page === 'careers') {
+      window.history.pushState(null, '', '/careers');
+      setCurrentPage('careers');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      window.history.pushState(null, '', '/');
+      setCurrentPage('home');
+      if (hashToScroll) {
+        setTimeout(() => {
+          scrollToSection(hashToScroll);
+        }, 100);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current || isSubmitting) return;
@@ -72,7 +116,7 @@ export default function App() {
     setSubmitStatus('idle');
 
     // Create a timeout promise to prevent hanging
-    const timeoutPromise = new Promise((_, reject) => 
+    const timeoutPromise = new Promise((_, reject) =>
       setTimeout(() => reject(new Error('Request timed out')), 15000)
     );
 
@@ -165,43 +209,43 @@ export default function App() {
   ];
 
   const techStack = [
-    { 
-      category: "Frontend", 
+    {
+      category: "Frontend",
       techs: [
         { name: "React", logo: reactIcon },
         { name: "Next.js", logo: nextjsIcon },
         { name: "TypeScript", logo: typescriptIcon },
         { name: "Tailwind CSS", logo: tailwindIcon },
         { name: "Redux", logo: reduxIcon }
-      ] 
+      ]
     },
-    { 
-      category: "Backend", 
+    {
+      category: "Backend",
       techs: [
         { name: "Node.js", logo: nodejsIcon },
         { name: "Go", logo: goIcon },
         { name: "Python", logo: pythonIcon },
         { name: "PostgreSQL", logo: postgresqlIcon },
         { name: "Redis", logo: redisIcon }
-      ] 
+      ]
     },
-    { 
-      category: "Infrastructure", 
+    {
+      category: "Infrastructure",
       techs: [
         { name: "AWS", logo: awsIcon },
         { name: "Azure", logo: azureIcon },
         { name: "Google Cloud", logo: gcpIcon }
-      ] 
+      ]
     },
-    { 
-      category: "DevOps", 
+    {
+      category: "DevOps",
       techs: [
         { name: "Docker", logo: dockerIcon },
         { name: "Kubernetes", logo: kubernetesIcon },
         { name: "Terraform", logo: terraformIcon },
         { name: "GitHub", logo: githubIcon },
         { name: "Grafana", logo: grafanaIcon }
-      ] 
+      ]
     }
   ];
 
@@ -284,25 +328,25 @@ export default function App() {
       {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-md-surface/80 backdrop-blur-md border-b border-md-outline/10">
         <div className="max-w-7xl mx-auto px-4 h-18 flex items-center justify-between">
-          <div className="flex items-center group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-            <img 
-              src={logoUrl} 
-              alt="Oohiti Logo" 
+          <div className="flex items-center group cursor-pointer" onClick={() => navigateTo('home')}>
+            <img
+              src={logoUrl}
+              alt="Oohiti Logo"
               loading="lazy"
               className="h-20 w-auto object-contain transition-transform group-hover:scale-105"
             />
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#services" className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Services</a>
-            <a href="#process" className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Process</a>
-            <a href="#work" className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Work</a>
-            <a href="#about" className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">About</a>
-            <a href="#careers" className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Careers</a>
-            <Button variant="filled" onClick={() => scrollToSection('contact')}>Get in touch</Button>
+            <a href="/#services" onClick={(e) => { e.preventDefault(); navigateTo('home', 'services'); }} className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Services</a>
+            <a href="/#process" onClick={(e) => { e.preventDefault(); navigateTo('home', 'process'); }} className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Process</a>
+            <a href="/#work" onClick={(e) => { e.preventDefault(); navigateTo('home', 'work'); }} className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">Work</a>
+            <a href="/#about" onClick={(e) => { e.preventDefault(); navigateTo('home', 'about'); }} className="text-sm font-medium text-md-on-surface-variant hover:text-md-primary transition-colors">About</a>
+            <a href="/careers" onClick={(e) => { e.preventDefault(); navigateTo('careers'); }} className={`text-sm font-medium transition-colors ${currentPage === 'careers' ? 'text-md-primary font-bold' : 'text-md-on-surface-variant hover:text-md-primary'}`}>Careers</a>
+            <Button variant="filled" onClick={() => navigateTo('home', 'contact')}>Get in touch</Button>
           </div>
 
-          <button 
+          <button
             className="md:hidden p-2 text-md-on-background"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -312,34 +356,38 @@ export default function App() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             className="md:hidden absolute top-16 left-0 w-full bg-md-surface border-b border-md-outline/10 p-4 flex flex-col gap-4 shadow-lg"
           >
-            <a href="#services" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium p-2">Services</a>
-            <a href="#process" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium p-2">Process</a>
-            <a href="#work" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium p-2">Work</a>
-            <a href="#about" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium p-2">About</a>
-            <a href="#careers" onClick={() => setIsMenuOpen(false)} className="text-lg font-medium p-2">Careers</a>
-            <Button variant="filled" className="w-full" onClick={() => { scrollToSection('contact'); setIsMenuOpen(false); }}>Get in touch</Button>
+            <a href="/#services" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); navigateTo('home', 'services'); }} className="text-lg font-medium p-2">Services</a>
+            <a href="/#process" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); navigateTo('home', 'process'); }} className="text-lg font-medium p-2">Process</a>
+            <a href="/#work" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); navigateTo('home', 'work'); }} className="text-lg font-medium p-2">Work</a>
+            <a href="/#about" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); navigateTo('home', 'about'); }} className="text-lg font-medium p-2">About</a>
+            <a href="/careers" onClick={(e) => { e.preventDefault(); setIsMenuOpen(false); navigateTo('careers'); }} className={`text-lg font-medium p-2 ${currentPage === 'careers' ? 'text-md-primary font-bold' : ''}`}>Careers</a>
+            <Button variant="filled" className="w-full" onClick={() => { setIsMenuOpen(false); navigateTo('home', 'contact'); }}>Get in touch</Button>
           </motion.div>
         )}
       </nav>
 
-      {/* Hero Section */}
-      <Section className="relative overflow-hidden pt-20 pb-32">
+      {currentPage === 'careers' ? (
+        <Careers />
+      ) : (
+        <>
+          {/* Hero Section */}
+          <Section className="relative overflow-hidden pt-20 pb-32">
         {/* Background Watermark */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none -z-10 select-none overflow-hidden">
-          <img 
-            src={logoUrl} 
-            alt="" 
+          <img
+            src={logoUrl}
+            alt=""
             loading="lazy"
             className="w-[120%] max-w-none h-auto opacity-[0.03] grayscale scale-110 select-none"
             referrerPolicy="no-referrer"
           />
         </div>
-        
+
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -369,9 +417,9 @@ export default function App() {
       </Section>
 
       {/* Services Section */}
-      <Section 
-        id="services" 
-        title="What we help you achieve" 
+      <Section
+        id="services"
+        title="What we help you achieve"
         className="bg-md-surface-container/50"
       >
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -405,16 +453,16 @@ export default function App() {
       </Section>
 
       {/* How It Works Section */}
-      <Section 
-        id="process" 
-        title="Simple process. Clear results." 
+      <Section
+        id="process"
+        title="Simple process. Clear results."
         subtitle="How we take your vision from concept to high-performance reality."
       >
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
           <div className="hidden lg:block absolute top-1/2 left-0 w-full h-0.5 bg-md-outline/10 -translate-y-1/2 -z-10" />
-          
+
           {processSteps.map((step, index) => (
-            <motion.div 
+            <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -457,9 +505,9 @@ export default function App() {
                   {group.techs.map((tech, i) => (
                     <div key={i} className="group/tech relative">
                       <div className="w-12 h-12 p-2 rounded-xl bg-md-surface border border-md-outline/10 flex items-center justify-center hover:border-md-primary/30 hover:bg-md-primary/5 transition-all duration-300">
-                        <img 
-                          src={tech.logo} 
-                          alt={tech.name} 
+                        <img
+                          src={tech.logo}
+                          alt={tech.name}
                           loading="lazy"
                           className="w-full h-full object-contain filter grayscale group-hover/tech:grayscale-0 transition-all duration-300"
                         />
@@ -498,15 +546,15 @@ export default function App() {
                       {study.category}
                     </span>
                   </div>
-                  
+
                   <h3 className="text-2xl font-bold mb-4 group-hover:text-md-primary transition-colors leading-tight">
                     {study.title}
                   </h3>
-                  
+
                   <p className="text-sm text-md-on-surface-variant leading-relaxed mb-6">
                     {study.description}
                   </p>
-                  
+
                   <div className="flex flex-wrap gap-2 mb-8">
                     {study.tags.map((tag, i) => (
                       <span key={i} className="text-[10px] font-bold px-3 py-1 rounded-full bg-md-surface-container-low text-md-on-surface-variant">
@@ -514,7 +562,7 @@ export default function App() {
                       </span>
                     ))}
                   </div>
-                  
+
                   <div className="space-y-3 mb-8 pt-6 border-t border-md-outline/10">
                     {study.bullets.map((bullet, i) => (
                       <div key={i} className="flex items-start gap-3">
@@ -527,10 +575,10 @@ export default function App() {
                   {study.links && (
                     <div className="mt-auto pt-6 flex flex-wrap gap-3">
                       {study.links.map((link, i) => (
-                        <a 
-                          key={i} 
-                          href={link.url} 
-                          target="_blank" 
+                        <a
+                          key={i}
+                          href={link.url}
+                          target="_blank"
                           rel="noopener noreferrer"
                           className="inline-block"
                         >
@@ -580,7 +628,7 @@ export default function App() {
               </div>
             </div>
           </div>
-          
+
           <div>
             <h2 className="text-4xl font-bold text-md-on-background mb-6 tracking-tight">
               A technology partner, not just a service provider
@@ -599,61 +647,6 @@ export default function App() {
         </div>
       </Section>
 
-      {/* Careers Section */}
-      <Section id="careers" className="bg-md-surface-container/30">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-md-primary mb-4 block">Careers</span>
-            <h2 className="text-4xl font-bold text-md-on-background mb-6 tracking-tight">
-              Build your career with us
-            </h2>
-            <div className="space-y-6 text-lg text-md-on-surface-variant leading-relaxed mb-8">
-              <p>We're looking for passionate individuals who want to build real-world products and gain hands-on industry exposure.</p>
-              <div className="bg-md-surface p-8 rounded-2xl border border-md-outline/10 md-shadow-1">
-                <h3 className="text-2xl font-bold text-md-primary mb-3">Internship Training Program</h3>
-                <p className="text-base text-md-on-surface-variant mb-6">A fast-paced, immersive program designed for aspiring developers. Focus on building real-world applications, modern tech stacks, deployment, and creating a production-ready portfolio.</p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <a href="/assets/oohiti_brochure.pdf" target="_blank" rel="noopener noreferrer">
-                    <Button variant="filled" className="w-full sm:w-auto h-12 px-6">
-                      View Brochure
-                    </Button>
-                  </a>
-                  <a href="/assets/oohiti_brochure.pdf" download>
-                    <Button variant="outlined" className="w-full sm:w-auto h-12 px-6">
-                      Download Brochure
-                    </Button>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="relative h-full min-h-[400px] bg-md-surface-container rounded-3xl md-shadow-1 overflow-hidden flex items-center justify-center p-8 border border-md-outline/5">
-            <div className="absolute inset-0 bg-gradient-to-br from-md-primary/10 to-transparent pointer-events-none"></div>
-            <div className="grid grid-cols-2 gap-6 w-full relative z-10">
-              <div className="bg-md-surface p-6 rounded-2xl text-center md-shadow-sm group hover:border-md-primary/30 transition-colors border border-transparent">
-                <Rocket className="w-10 h-10 text-md-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                <h4 className="font-bold mb-2">Real Projects</h4>
-                <p className="text-sm text-md-on-surface-variant">Build from scratch</p>
-              </div>
-              <div className="bg-md-surface p-6 rounded-2xl text-center md-shadow-sm mt-12 group hover:border-md-primary/30 transition-colors border border-transparent">
-                <Layers className="w-10 h-10 text-md-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                <h4 className="font-bold mb-2">Modern Stack</h4>
-                <p className="text-sm text-md-on-surface-variant">React, Node, Cloud</p>
-              </div>
-              <div className="bg-md-surface p-6 rounded-2xl text-center md-shadow-sm -mt-12 group hover:border-md-primary/30 transition-colors border border-transparent">
-                <Cloud className="w-10 h-10 text-md-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                <h4 className="font-bold mb-2">Deployment</h4>
-                <p className="text-sm text-md-on-surface-variant">CI/CD & DevOps</p>
-              </div>
-              <div className="bg-md-surface p-6 rounded-2xl text-center md-shadow-sm group hover:border-md-primary/30 transition-colors border border-transparent">
-                <Users className="w-10 h-10 text-md-primary mx-auto mb-4 group-hover:scale-110 transition-transform" />
-                <h4 className="font-bold mb-2">Mentorship</h4>
-                <p className="text-sm text-md-on-surface-variant">Industry experts</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Section>
 
       {/* Why Choose Us Section */}
       <Section title="Why startups choose Oohiti" subtitle="Clarity, speed, and technical excellence in every project.">
@@ -680,7 +673,7 @@ export default function App() {
         <div className="bg-md-primary text-white rounded-[48px] p-12 md:p-24 text-center relative overflow-hidden md-shadow-3">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
-          
+
           <div className="relative z-10 max-w-3xl mx-auto">
             <h2 className="text-4xl md:text-6xl font-bold mb-8 tracking-tight">
               Have an idea? Let’s build it the right way.
@@ -720,8 +713,8 @@ export default function App() {
             <form ref={formRef} className="space-y-6" onSubmit={handleContactSubmit}>
               <div className="text-left">
                 <label htmlFor="name" className="block text-sm font-bold text-md-on-background mb-2 ml-1">Name</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   id="name"
                   name="user_name"
                   required
@@ -731,8 +724,8 @@ export default function App() {
               </div>
               <div className="text-left">
                 <label htmlFor="email" className="block text-sm font-bold text-md-on-background mb-2 ml-1">Email</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   id="email"
                   name="user_email"
                   required
@@ -742,7 +735,7 @@ export default function App() {
               </div>
               <div className="text-left">
                 <label htmlFor="message" className="block text-sm font-bold text-md-on-background mb-2 ml-1">Message</label>
-                <textarea 
+                <textarea
                   id="message"
                   name="message"
                   required
@@ -751,21 +744,21 @@ export default function App() {
                   className="w-full p-6 rounded-xl bg-md-surface-container border border-md-outline/10 focus:border-md-primary focus:ring-1 focus:ring-md-primary outline-none transition-all placeholder:text-md-on-surface-variant/40 resize-none"
                 ></textarea>
               </div>
-              
+
               {submitStatus === 'success' && (
                 <div className="p-4 bg-green-500/10 border border-green-500/20 text-green-600 rounded-xl text-sm font-medium text-center">
                   Message sent successfully! We'll get back to you soon.
                 </div>
               )}
-              
+
               {submitStatus === 'error' && (
                 <div className="p-4 bg-red-500/10 border border-red-500/20 text-red-600 rounded-xl text-sm font-medium text-center">
                   Something went wrong. Please try again or email us directly.
                 </div>
               )}
 
-              <Button 
-                variant="filled" 
+              <Button
+                variant="filled"
                 type="submit"
                 disabled={isSubmitting}
                 className="w-full h-16 text-lg rounded-full gap-2 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -775,22 +768,24 @@ export default function App() {
               </Button>
             </form>
           </Card>
-          
+
           <div className="mt-12 flex items-center justify-center gap-2 text-md-on-surface-variant hover:text-md-primary transition-colors cursor-pointer group">
             <Mail className="w-5 h-5" />
             <span className="font-medium">contact.oohiti@gmail.com</span>
           </div>
         </div>
       </Section>
+        </>
+      )}
 
       {/* Footer */}
       <footer className="bg-md-surface border-t border-md-outline/10 py-16 px-4">
         <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-12">
           <div className="col-span-2">
-            <div className="flex items-center mb-6 group cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-              <img 
-                src={logoUrl} 
-                alt="Oohiti Logo" 
+            <div className="flex items-center mb-6 group cursor-pointer" onClick={() => navigateTo('home')}>
+              <img
+                src={logoUrl}
+                alt="Oohiti Logo"
                 loading="lazy"
                 className="h-20 w-auto object-contain transition-transform group-hover:scale-105"
               />
@@ -799,46 +794,47 @@ export default function App() {
               We partner with startups to build products that are ready to scale from day one
             </p>
             <div className="flex gap-4">
-              <a 
-                href="https://www.linkedin.com/company/oohiti/?viewAsMember=true" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.linkedin.com/company/oohiti/?viewAsMember=true"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-md-surface-container flex items-center justify-center hover:bg-md-primary/10 transition-colors"
               >
                 <img src={linkedinUrl} alt="LinkedIn" loading="lazy" className="w-5 h-5" referrerPolicy="no-referrer" />
               </a>
-              <a 
-                href="https://x.com/Oohiti130611" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://x.com/Oohiti130611"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-md-surface-container flex items-center justify-center hover:bg-md-primary/10 transition-colors"
               >
                 <img src={twitterUrl} alt="Twitter" loading="lazy" className="w-5 h-5" referrerPolicy="no-referrer" />
               </a>
             </div>
           </div>
-          
+
           <div>
             <h4 className="font-bold mb-6">Services</h4>
             <ul className="space-y-4 text-sm text-md-on-surface-variant">
-              <li><a href="#services" className="hover:text-md-primary transition-colors">MVP Development</a></li>
-              <li><a href="#services" className="hover:text-md-primary transition-colors">Full-Stack Development</a></li>
-              <li><a href="#services" className="hover:text-md-primary transition-colors">Cloud & Infrastructure</a></li>
-              <li><a href="#services" className="hover:text-md-primary transition-colors">DevOps & Automation</a></li>
+              <li><a href="/#services" onClick={(e) => { e.preventDefault(); navigateTo('home', 'services'); }} className="hover:text-md-primary transition-colors">MVP Development</a></li>
+              <li><a href="/#services" onClick={(e) => { e.preventDefault(); navigateTo('home', 'services'); }} className="hover:text-md-primary transition-colors">Full-Stack Development</a></li>
+              <li><a href="/#services" onClick={(e) => { e.preventDefault(); navigateTo('home', 'services'); }} className="hover:text-md-primary transition-colors">Cloud & Infrastructure</a></li>
+              <li><a href="/#services" onClick={(e) => { e.preventDefault(); navigateTo('home', 'services'); }} className="hover:text-md-primary transition-colors">DevOps & Automation</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold mb-6">Company</h4>
             <ul className="space-y-4 text-sm text-md-on-surface-variant">
-              <li><a href="#about" className="hover:text-md-primary transition-colors">About Us</a></li>
-              <li><a href="#process" className="hover:text-md-primary transition-colors">Our Process</a></li>
-              <li><a href="#work" className="hover:text-md-primary transition-colors">Case Studies</a></li>
-              <li><a href="#" className="hover:text-md-primary transition-colors">Contact</a></li>
+              <li><a href="/#about" onClick={(e) => { e.preventDefault(); navigateTo('home', 'about'); }} className="hover:text-md-primary transition-colors">About Us</a></li>
+              <li><a href="/#process" onClick={(e) => { e.preventDefault(); navigateTo('home', 'process'); }} className="hover:text-md-primary transition-colors">Our Process</a></li>
+              <li><a href="/#work" onClick={(e) => { e.preventDefault(); navigateTo('home', 'work'); }} className="hover:text-md-primary transition-colors">Case Studies</a></li>
+              <li><a href="/careers" onClick={(e) => { e.preventDefault(); navigateTo('careers'); }} className="hover:text-md-primary transition-colors">Careers</a></li>
+              <li><a href="/#contact" onClick={(e) => { e.preventDefault(); navigateTo('home', 'contact'); }} className="hover:text-md-primary transition-colors">Contact</a></li>
             </ul>
           </div>
         </div>
-        
+
         <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-md-outline/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-sm font-medium text-md-on-surface-variant">
             Built with clarity. Designed for growth.
